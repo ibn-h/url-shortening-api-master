@@ -15,10 +15,27 @@
 
   --breakpoint-mobile: 375px;
   --breakpoint-desktop: 1440px;
+
+  --padding-x-mobile: 24px;
+  --padding-x-desktop: 64px;
+  --padding-y-mobile: 64px;
 }
 
 @layer base {
   body {
     @apply bg-white text-gray-900 text-lg font-poppins;
   }
+
+  p {
+    @apply text-gray-500 leading-normal;
+  }
+}
+
+footer svg {
+  width: fit-content;
+  height: auto;
+}
+
+footer svg path {
+  fill: white;
 }

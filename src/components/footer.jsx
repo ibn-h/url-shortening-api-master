@@ -1,3 +1,75 @@
+import Logo from "../assets/logo.svg?react";
+
+const footerSections = [
+  {
+    title: "Features",
+    items: ["Link Shortening", "Branded Links", "Analytics"],
+  },
+  {
+    title: "Resources",
+    items: ["Blog", "Developers", "Support"],
+  },
+  {
+    title: "Company",
+    items: ["About", "Our Team", "Careers", "Contact"],
+  },
+];
+
+const icons = [
+  {
+    name: "Facebook",
+    src: "src/assets/icon-facebook.svg",
+  },
+  {
+    name: "Twitter",
+    src: "src/assets/icon-twitter.svg",
+  },
+  {
+    name: "Pinterest",
+    src: "src/assets/icon-pinterest.svg",
+  },
+
+  {
+    name: "Instagram",
+    src: "src/assets/icon-instagram.svg",
+  },
+];
+
 export default function Footer() {
-  return <div>Footer</div>;
+  return (
+    <footer className="px-(--padding-x-mobile) py-(--padding-y-mobile) bg-gray-950 text-white">
+      <div className="flex items-center justify-center flex-col text-center gap-12">
+        <Logo className="w-35 h-auto text-white fill-current flex items-center justify-center" />
+
+        <div className="flex items-center justify-center flex-col gap-12">
+          {footerSections.map((section) => (
+            <div
+              key={section.title}
+              className="flex items-center justify-center text-center flex-col gap-6"
+            >
+              <h4 className="font-bold">{section.title}</h4>
+              <ul className="flex flex-col items-center justify-center gap-1">
+                {section.items.map((item) => (
+                  <li key={item} className="text-gray-400">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          <div className="flex items-center justify-center gap-3">
+            {icons.map((icon) => (
+              <img
+                key={icon.name}
+                src={icon.src}
+                alt={`${icon.name} Icon`}
+                className="w-6 h-auto mx-2"
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 }
