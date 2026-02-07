@@ -17,8 +17,9 @@
   --breakpoint-desktop: 1440px;
 
   --padding-x-mobile: 24px;
-  --padding-x-desktop: 64px;
+  --padding-x-desktop: 100px;
   --padding-y-mobile: 64px;
+  --padding-y-desktop: 80px;
 }
 
 @layer base {
