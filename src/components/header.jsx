@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const hoverStyle = "hover:text-black transition-colors duration-300";
+
 export default function Header() {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
@@ -20,18 +22,27 @@ export default function Header() {
             (isMenuVisible ? " flex" : " hidden")
           }
         >
-          <a href="">Features</a>
-          <a href="">Pricing</a>
-          <a href="">Resources</a>
+          <a href="" className={hoverStyle}>
+            Features
+          </a>
+          <a href="" className={hoverStyle}>
+            Pricing
+          </a>
+          <a href="" className={hoverStyle}>
+            Resources
+          </a>
           <a
             href=""
-            className="pt-5 border-t w-full border-gray-400/40 desktop:border-none desktop:pt-0 desktop:w-auto desktop:ml-auto"
+            className={
+              hoverStyle +
+              " pt-5 border-t w-full border-gray-400/40 desktop:border-none desktop:pt-0 desktop:w-auto desktop:ml-auto"
+            }
           >
             Login
           </a>
           <a
             href=""
-            className="bg-primary-blue w-full p-3 rounded-3xl desktop:w-auto text-white desktop:px-7 desktop:py-2.5"
+            className="buttonHover bg-primary-blue w-full p-3 rounded-3xl desktop:w-auto text-white desktop:px-7 desktop:py-2.5"
           >
             Sign Up
           </a>

@@ -17,7 +17,7 @@
   --breakpoint-desktop: 1440px;
 
   --padding-x-mobile: 24px;
-  --padding-x-desktop: 100px;
+  --padding-x-desktop: 128px;
   --padding-y-mobile: 64px;
   --padding-y-desktop: 80px;
 }
@@ -28,7 +28,7 @@
   }
 
   p {
-    @apply text-gray-500 leading-normal;
+    @apply text-gray-500 leading-normal max-w-150;
   }
 }
 
@@ -39,4 +39,8 @@ footer svg {
 
 footer svg path {
   fill: white;
+}
+
+.buttonHover {
+  @apply hover:bg-[#95e7e7] transition-colors duration-300;
 }
