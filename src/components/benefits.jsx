@@ -21,7 +21,7 @@ const benefitsContent = [
 
 export default function Benefits() {
   return (
-    <section className="px-(--padding-x-mobile) bg-gray-100 py-(--padding-y-mobile) relative desktop:px-(--padding-x-desktop) desktop:py-40">
+    <section className="px-(--padding-x-mobile) bg-gray-100 py-(--padding-y-mobile) relative desktop:px-(--padding-x-desktop)">
       <div className="flex items-center justify-center flex-col gap-25 overflow-hidden">
         <div className="flex items-center justify-center flex-col text-center gap-6">
           <h2 className="text-2xl font-bold desktop:text-4xl">
