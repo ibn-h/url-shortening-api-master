@@ -1,5 +1,3 @@
-import BenefitCard from "./benefitCard";
-
 const benefitsContent = [
   {
     icon: "src/assets/icon-brand-recognition.svg",
