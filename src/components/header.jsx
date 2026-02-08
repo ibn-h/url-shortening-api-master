@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-const hoverStyle = "hover:text-black transition-colors duration-300";
+const hoverStyle =
+  "hover:text-primary-blue desktop:hover:text-black transition-colors duration-300";
 
 export default function Header() {
   const [isMenuVisible, setIsMenuVisible] = useState(false);

@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 
-const APU_URL = "https://ulvis.net/api.php?url=";
-
+const API_URL = "https://ulvis.net/api.php?url=";
 const MAX_LINKS = 3;
 const COPY_TIMEOUT = 2000;
 
@@ -28,7 +27,8 @@ export default function ShortenerForm() {
     if (!link) {
       setIsError(true);
     } else {
-      const data = await fetchUrl(normalizeUrl(link));
+      const normalizedUrl = normalizeUrl(link);
+      const data = await fetchUrl(normalizeUrl(normalizedUrl));
       const newUrl = data[0].url;
 
       if (links.length === MAX_LINKS) {
@@ -38,7 +38,7 @@ export default function ShortenerForm() {
       setLinks((prev) => [
         ...prev,
         {
-          originalUrl: link,
+          originalUrl: normalizedUrl,
           shortUrl: newUrl,
         },
       ]);
@@ -63,14 +63,11 @@ export default function ShortenerForm() {
 
   const fetchUrl = async (Url) => {
     try {
-      const response = await fetch(
-        "https://cors-anywhere.herokuapp.com/https://clc.is/api/links",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ domain: "clc.is", target_url: Url }),
-        },
-      );
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ domain: "clc.is", target_url: Url }),
+      });
 
       if (!response.ok) {
         throw new Error("Error: ", response.status);
@@ -85,26 +82,28 @@ export default function ShortenerForm() {
   };
 
   return (
-    <section className="px-(--padding-x-mobile) relative z-10 bg-gray-100">
+    <section className="px-(--padding-x-mobile) relative z-10 bg-gray-100 desktop:px-(--padding-x-desktop)">
       <div className="relative bottom-15 mt-15 flex items-center justify-center flex-col gap-6">
-        <div className="w-full p-6 desktop:p-10 desktop:px-12 bg-primary-purple text-white rounded-lg gap-5 flex items-center justify-center flex-col bg-[url('src/assets/bg-shorten-mobile.svg')] bg-no-repeat bg-top-right desktop:flex-row desktop:bg-[url('src/assets/bg-shorten-desktop.svg')] desktop:bg-cover">
-          <input
-            required
-            type="text"
-            ref={inputRef}
-            placeholder="Shorten a link here..."
-            onChange={updateErrorState}
-            className={
-              "focus:ring-primary-blue focus:outline-none focus:ring-2 w-full bg-white text-gray-600 p-3 rounded-lg text-left desktop:w-auto desktop:flex-1 desktop:px-5 desktop:py-3" +
-              (isError ? " ring-3 ring-secondary-red" : "")
-            }
-          />
+        <div className="w-full p-6 desktop:p-10 desktop:px-12 bg-primary-purple text-white rounded-lg gap-5 flex items-start justify-center flex-col bg-[url('src/assets/bg-shorten-mobile.svg')] bg-no-repeat bg-top-right desktop:flex-row desktop:bg-[url('src/assets/bg-shorten-desktop.svg')] desktop:bg-cover">
+          <div className="desktop:w-auto desktop:flex-1 relative w-full">
+            <input
+              required
+              type="text"
+              ref={inputRef}
+              placeholder="Shorten a link here..."
+              onChange={updateErrorState}
+              className={
+                "focus:ring-primary-blue focus:outline-none focus:ring-2 w-full bg-white text-gray-600 p-3 rounded-lg text-left desktop:px-5 desktop:py-3" +
+                (isError ? " ring-3 ring-secondary-red" : "")
+              }
+            />
 
-          {isError && (
-            <p className="text-secondary-red self-start text-sm italic relative -top-1">
-              Please add a link here
-            </p>
-          )}
+            {isError && (
+              <p className="text-secondary-red self-start text-sm italic relative mt-2">
+                Please add a link here
+              </p>
+            )}
+          </div>
 
           <button
             className="buttonHover bg-primary-blue text-white p-3 rounded-lg w-full font-semibold desktop:w-fit desktop:px-7 desktop:py-3 cursor-pointer"
@@ -118,14 +117,14 @@ export default function ShortenerForm() {
           {links.map((link, index) => (
             <div
               key={index}
-              className="bg-white p-4 rounded-lg w-full flex items-start justify-center flex-col gap-4"
+              className="desktop:items-center bg-white p-4 rounded-lg w-full flex items-start justify-center flex-col gap-4 desktop:flex-row"
             >
               <p className="text-black">{link.originalUrl}</p>
-              <div className="bg-gray-100 w-screen h-0.5 relative right-10"></div>
+              <div className="bg-gray-100 w-screen h-0.5 relative right-10 desktop:hidden"></div>
               <a
                 href={link.shortUrl}
                 target="_blank"
-                className="text-primary-blue"
+                className="text-primary-blue desktop:ml-auto desktop:mr-4"
               >
                 {link.shortUrl}
               </a>
@@ -137,7 +136,7 @@ export default function ShortenerForm() {
                   );
                 }}
                 className={
-                  "w-full cursor-pointer bg-primary-blue text-center text-white p-2.5 rounded-lg font-semibold" +
+                  "desktop:w-auto desktop:px-7 desktop:py-2.5 w-full cursor-pointer bg-primary-blue text-center text-white p-2.5 rounded-lg font-semibold" +
                   (copied === index ? " bg-primary-purple" : "buttonHover")
                 }
               >

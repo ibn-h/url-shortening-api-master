@@ -42,17 +42,21 @@ export default function Footer() {
         <Logo className="w-35 h-auto text-white fill-current flex items-center justify-center" />
 
         <div className="flex items-center justify-center flex-col gap-12 desktop:flex-row desktop:items-start desktop:gap-20">
-          {footerSections.map((section) => (
+          {footerSections.map((section, index) => (
             <div
-              key={section.title}
+              key={index}
               className="flex items-center justify-center text-center flex-col gap-6 desktop:text-left desktop:items-start desktop:justify-start"
             >
               <h4 className="font-bold">{section.title}</h4>
               <ul className="flex flex-col items-center justify-center gap-1 desktop:items-start desktop:justify-start">
-                {section.items.map((item) => (
-                  <li key={item} className="text-gray-400">
-                    {item}
-                  </li>
+                {section.items.map((item, index) => (
+                  <a href="" key={index}>
+                    <li
+                      className="text-gray-400 transition-colors hover:text-primary-blue duration-300 cursor-pointer"
+                    >
+                      {item}
+                    </li>
+                  </a>
                 ))}
               </ul>
             </div>
@@ -62,7 +66,6 @@ export default function Footer() {
             {icons.map((icon, index) => (
               <a href="" key={index}>
                 <img
-                  key={icon.name}
                   src={icon.src}
                   alt={`${icon.name} Icon`}
                   className="w-6 h-auto mx-2"
