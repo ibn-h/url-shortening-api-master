@@ -23,13 +23,25 @@ export default function ShortenerForm() {
   const shortenLink = async (event) => {
     event.preventDefault();
     const input = inputRef.current;
-    const link = normalizeUrl(input.value);
+    const link = input.value;
 
     if (!link) {
       setIsError(true);
     } else {
-      const data = await fetchUrl(link);
-      console.log(data);
+      const data = await fetchUrl(normalizeUrl(link));
+      const newUrl = data[0].url;
+
+      if (links.length === MAX_LINKS) {
+        setLinks((prev) => prev.slice(1));
+      }
+
+      setLinks((prev) => [
+        ...prev,
+        {
+          originalUrl: link,
+          shortUrl: newUrl,
+        },
+      ]);
     }
   };
 
@@ -103,27 +115,36 @@ export default function ShortenerForm() {
         </div>
 
         <div className="w-full flex items-center justify-center flex-col gap-4">
-          <div className="bg-white p-4 rounded-lg w-full flex items-start justify-center flex-col gap-4">
-            <p className="text-black">https://www.frontendmentor.io</p>
-            <div className="bg-gray-100 w-screen h-0.5 relative right-10"></div>
-            <a href="" className="text-primary-blue">
-              https://rel.ink/k4iKyk
-            </a>
-            <button
-              onClick={(e) => {
-                copyToClipboard(
-                  e.target.parentElement.querySelector("a").textContent,
-                  1,
-                );
-              }}
-              className={
-                "w-full cursor-pointer bg-primary-blue text-center text-white p-2.5 rounded-lg font-semibold" +
-                (copied === 1 ? " bg-primary-purple" : "buttonHover")
-              }
+          {links.map((link, index) => (
+            <div
+              key={index}
+              className="bg-white p-4 rounded-lg w-full flex items-start justify-center flex-col gap-4"
             >
-              {copied === 1 ? "Copied!" : "Copy"}
-            </button>
-          </div>
+              <p className="text-black">{link.originalUrl}</p>
+              <div className="bg-gray-100 w-screen h-0.5 relative right-10"></div>
+              <a
+                href={link.shortUrl}
+                target="_blank"
+                className="text-primary-blue"
+              >
+                {link.shortUrl}
+              </a>
+              <button
+                onClick={(e) => {
+                  copyToClipboard(
+                    e.target.parentElement.querySelector("a").textContent,
+                    index,
+                  );
+                }}
+                className={
+                  "w-full cursor-pointer bg-primary-blue text-center text-white p-2.5 rounded-lg font-semibold" +
+                  (copied === index ? " bg-primary-purple" : "buttonHover")
+                }
+              >
+                {copied === index ? "Copied!" : "Copy"}
+              </button>
+            </div>
+          ))}
         </div>
       </div>
     </section>
