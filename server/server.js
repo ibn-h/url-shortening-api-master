@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 
+const API_URL = "https://ulvis.net/api.php?url=";
 const PORT = 3000;
 
 const app = express();
@@ -20,10 +21,15 @@ app.get("/shorten", async (req, res) => {
       return res.status(400).json({ error: "URL parameter is required" });
     }
 
-    // Use built-in fetch (Node.js 18+)
-    const response = await fetch(
-      `https://ulvis.net/api.php?url=${encodeURIComponent(url)}`,
-    );
+    const response = await fetch(API_URL + encodeURIComponent(url), {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      },
+      body: JSON.stringify({ domain: "clc.is", target_url: url }),
+    });
 
     if (!response.ok) {
       return res.status(response.status).json({
@@ -32,7 +38,9 @@ app.get("/shorten", async (req, res) => {
     }
 
     const data = await response.json();
-    res.json(data);
+    console.log("Response body:", data);
+
+    res.json({ result: data });
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ error: "Server error: " + error.message });
