@@ -1,17 +1,36 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+
+const APU_URL = "https://ulvis.net/api.php?url=";
+
 const MAX_LINKS = 3;
 const COPY_TIMEOUT = 2000;
 
 export default function ShortenerForm() {
   const [copied, setCopied] = useState(null);
   const [isError, setIsError] = useState(false);
+  const [links, setLinks] = useState([]);
 
-  const shortenLink = (event) => {
+  const inputRef = useRef(null);
+
+  const normalizeUrl = (url) => {
+    const trimmed = url.trim();
+
+    return trimmed.startsWith("http://") || trimmed.startsWith("https://")
+      ? url
+      : "https://" + url;
+  };
+
+  const shortenLink = async (event) => {
     event.preventDefault();
-    const input = event.target.elements[0];
-    const link = input.value.trim();
+    const input = inputRef.current;
+    const link = normalizeUrl(input.value);
 
-    console.log(link);
+    if (!link) {
+      setIsError(true);
+    } else {
+      const data = await fetchUrl(link);
+      console.log(data);
+    }
   };
 
   const copyToClipboard = async (text, id) => {
@@ -22,6 +41,37 @@ export default function ShortenerForm() {
     setTimeout(() => setCopied(null), COPY_TIMEOUT);
   };
 
+  const updateErrorState = () => {
+    const input = inputRef.current;
+
+    if (input.value.trim().length > 0) {
+      setIsError(false);
+    }
+  };
+
+  const fetchUrl = async (Url) => {
+    try {
+      const response = await fetch(
+        "https://cors-anywhere.herokuapp.com/https://clc.is/api/links",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ domain: "clc.is", target_url: Url }),
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Error: ", response.status);
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      console.error("Failed to fetch shortened URL: ", error);
+    }
+  };
+
   return (
     <section className="px-(--padding-x-mobile) relative z-10 bg-gray-100">
       <div className="relative bottom-15 mt-15 flex items-center justify-center flex-col gap-6">
@@ -29,7 +79,9 @@ export default function ShortenerForm() {
           <input
             required
             type="text"
+            ref={inputRef}
             placeholder="Shorten a link here..."
+            onChange={updateErrorState}
             className={
               "focus:ring-primary-blue focus:outline-none focus:ring-2 w-full bg-white text-gray-600 p-3 rounded-lg text-left desktop:w-auto desktop:flex-1 desktop:px-5 desktop:py-3" +
               (isError ? " ring-3 ring-secondary-red" : "")

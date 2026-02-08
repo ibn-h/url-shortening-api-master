@@ -59,8 +59,8 @@ export default function Footer() {
           ))}
 
           <div className="flex items-center justify-center gap-3">
-            {icons.map((icon) => (
-              <a href="">
+            {icons.map((icon, index) => (
+              <a href="" key={index}>
                 <img
                   key={icon.name}
                   src={icon.src}
