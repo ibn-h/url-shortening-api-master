@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 
-const API_URL = "https://ulvis.net/api.php?url=";
+const API_URL = "http://localhost:3000/shorten?url=";
 const MAX_LINKS = 3;
 const COPY_TIMEOUT = 2000;
 
@@ -29,7 +29,9 @@ export default function ShortenerForm() {
     } else {
       const normalizedUrl = normalizeUrl(link);
       const data = await fetchUrl(normalizeUrl(normalizedUrl));
-      const newUrl = data[0].url;
+      console.log(data);
+
+      const newUrl = data.result;
 
       if (links.length === MAX_LINKS) {
         setLinks((prev) => prev.slice(1));
@@ -63,11 +65,7 @@ export default function ShortenerForm() {
 
   const fetchUrl = async (Url) => {
     try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ domain: "clc.is", target_url: Url }),
-      });
+      const response = await fetch(API_URL + Url);
 
       if (!response.ok) {
         throw new Error("Error: ", response.status);
