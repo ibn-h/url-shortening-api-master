@@ -22,6 +22,8 @@ router.get("/shorten", async (req, res) => {
     if (!url)
       return res.status(400).json({ error: "URL parameter is required" });
 
+    console.log("Request received at:", req.path);
+
     const response = await fetch(API_URL + encodeURIComponent(url));
     const data = await response.text();
 
