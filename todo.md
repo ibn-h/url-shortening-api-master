@@ -2,6 +2,7 @@
 [x]Design website for desktop (1440px)
 [x]Make API work
 [x]Host backend on Netlify
+[]Remove current URL shortener API and add TinyURL or something else
 []Make footer icons svg to change color on hover
 []Test if mobile navigation menu works properly if you alter screen size
 []Let Copilot scan codebase for security issues. Also ask to give feedback on effectiveness and optimize if necessary
