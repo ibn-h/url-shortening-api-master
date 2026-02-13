@@ -25,6 +25,8 @@ router.get("/shorten", async (req, res) => {
     const response = await fetch(API_URL + encodeURIComponent(url));
     const data = await response.text();
 
+    console.log(data);
+
     res.json({ result: data });
   } catch (error) {
     res.status(500).json({ error: "Server error: " + error.message });

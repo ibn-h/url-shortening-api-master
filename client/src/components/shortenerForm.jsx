@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 
-const API_URL = "http://localhost:3000/shorten?url=";
+const API_URL = "https://url-shortening-api-0.netlify.app/shorten?url=";
 const MAX_LINKS = 3;
 const COPY_TIMEOUT = 2000;
 
