@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import serverless from "serverless-http";
-import fetch from "node-fetch";
 
 const API_URL = "https://ulvis.net/api.php?url=";
 
