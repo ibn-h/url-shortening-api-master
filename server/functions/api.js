@@ -24,7 +24,10 @@ router.get("/shorten", async (req, res) => {
 
     console.log("Request received at:", req.path);
 
-    const response = await fetch(API_URL + encodeURIComponent(url));
+    const response = await fetch(API_URL + encodeURIComponent(url), {
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    });
     const data = await response.text();
 
     console.log(data);
