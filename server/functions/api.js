@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import serverless from "serverless-http";
+import fetch from "node-fetch";
 
 const API_URL = "https://ulvis.net/api.php?url=";
 
@@ -11,11 +12,11 @@ app.use(express.json());
 
 const router = express.Router();
 
-app.get("/", (req, res) => {
+router.get("/", (req, res) => {
   res.json({ message: "API is running" });
 });
 
-app.get("/shorten", async (req, res) => {
+router.get("/shorten", async (req, res) => {
   try {
     const { url } = req.query;
 
@@ -31,6 +32,6 @@ app.get("/shorten", async (req, res) => {
   }
 });
 
-app.use("/.netlify/functional/api", router);
+app.use("/", router);
 
 export const handler = serverless(app);
