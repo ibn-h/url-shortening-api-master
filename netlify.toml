@@ -6,5 +6,10 @@
   to = "/.netlify/functions/api"
   status = 200
 
+[functions]
+  # This tells Netlify: "Go into the server folder to find the packages"
+  directory = "server/functions"
+  node_bundle = true
+
 [dev]
   functions = "server/functions"
