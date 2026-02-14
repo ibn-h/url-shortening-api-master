@@ -1,4 +1,8 @@
 import Logo from "../assets/logo.svg?react";
+import FacebookLogo from "../assets/icon-facebook.svg?react";
+import TwitterLogo from "../assets/icon-twitter.svg?react";
+import PinterestLogo from "../assets/icon-pinterest.svg?react";
+import InstagramLogo from "../assets/icon-instagram.svg?react";
 
 const footerSections = [
   {
@@ -18,20 +22,20 @@ const footerSections = [
 const icons = [
   {
     name: "Facebook",
-    src: "src/assets/icon-facebook.svg",
+    logo: FacebookLogo,
   },
   {
     name: "Twitter",
-    src: "src/assets/icon-twitter.svg",
+    logo: TwitterLogo,
   },
   {
     name: "Pinterest",
-    src: "src/assets/icon-pinterest.svg",
+    logo: PinterestLogo,
   },
 
   {
     name: "Instagram",
-    src: "src/assets/icon-instagram.svg",
+    logo: InstagramLogo,
   },
 ];
 
@@ -39,7 +43,7 @@ export default function Footer() {
   return (
     <footer className="px-(--padding-x-mobile) py-(--padding-y-mobile) bg-gray-950 text-white desktop:px-(--padding-x-desktop) desktop:py-(--padding-y-desktop)">
       <div className="flex items-center justify-center flex-col text-center gap-12 desktop:flex-row w-full desktop:justify-between desktop:items-start">
-        <Logo className="w-35 h-auto text-white fill-current flex items-center justify-center" />
+        <Logo className="footer-logo w-35 h-auto text-white fill-current flex items-center justify-center" />
 
         <div className="flex items-center justify-center flex-col gap-12 desktop:flex-row desktop:items-start desktop:gap-20">
           {footerSections.map((section, index) => (
@@ -51,9 +55,7 @@ export default function Footer() {
               <ul className="flex flex-col items-center justify-center gap-1 desktop:items-start desktop:justify-start">
                 {section.items.map((item, index) => (
                   <a href="" key={index}>
-                    <li
-                      className="text-gray-400 transition-colors hover:text-primary-blue duration-300 cursor-pointer"
-                    >
+                    <li className="text-gray-400 transition-colors hover:text-primary-blue duration-300 cursor-pointer">
                       {item}
                     </li>
                   </a>
@@ -65,11 +67,9 @@ export default function Footer() {
           <div className="flex items-center justify-center gap-3">
             {icons.map((icon, index) => (
               <a href="" key={index}>
-                <img
-                  src={icon.src}
-                  alt={`${icon.name} Icon`}
-                  className="w-6 h-auto mx-2"
-                />
+                {
+                  <icon.logo className="hover:text-primary-blue footer-icon transition-colors duration-300" />
+                }
               </a>
             ))}
           </div>

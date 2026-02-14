@@ -32,15 +32,19 @@
   }
 }
 
-footer svg {
+.footer-logo {
   width: fit-content;
   height: auto;
 }
 
-footer svg path {
+.footer-logo path {
   fill: white;
 }
 
 .buttonHover {
   @apply hover:bg-[#95e7e7] transition-colors duration-300;
+}
+
+.footer-icon path {
+  fill: currentColor;
 }
