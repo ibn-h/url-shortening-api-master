@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 
-const API_URL = "https://url-shortening-api-0.netlify.app/shorten?url=";
+const API_URL = "https://api.tinyurl.com/create";
 const MAX_LINKS = 3;
 const COPY_TIMEOUT = 2000;
 
@@ -29,9 +29,8 @@ export default function ShortenerForm() {
     } else {
       const normalizedUrl = normalizeUrl(link);
       const data = await fetchUrl(normalizeUrl(normalizedUrl));
-      console.log(data);
 
-      const newUrl = data.result;
+      const newUrl = data.data.tiny_url;
 
       if (links.length === MAX_LINKS) {
         setLinks((prev) => prev.slice(1));
@@ -65,11 +64,15 @@ export default function ShortenerForm() {
 
   const fetchUrl = async (Url) => {
     try {
-      const response = await fetch(API_URL + Url);
-
-      if (!response.ok) {
-        throw new Error("Error: ", response.status);
-      }
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ url: Url }),
+      });
 
       const data = await response.json();
 
