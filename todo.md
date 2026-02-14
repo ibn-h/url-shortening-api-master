@@ -7,4 +7,4 @@
 [x]Test if mobile navigation menu works properly if you alter screen size
 [x]Check for error messages
 [x]Remove unused packages
-[]Add ability to shorten URL with enter key
+[x]Add ability to shorten URL with enter key
