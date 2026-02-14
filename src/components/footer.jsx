@@ -1,8 +1,8 @@
-import Logo from "src/assets/logo.svg?react";
-import FacebookLogo from "src/assets/icon-facebook.svg?react";
-import TwitterLogo from "src/assets/icon-twitter.svg?react";
-import PinterestLogo from "src/assets/icon-pinterest.svg?react";
-import InstagramLogo from "src/assets/icon-instagram.svg?react";
+import Logo from "../assets/logo.svg?react";
+import FacebookLogo from "../assets/icon-facebook.svg?react";
+import TwitterLogo from "../assets/icon-twitter.svg?react";
+import PinterestLogo from "../assets/icon-pinterest.svg?react";
+import InstagramLogo from "../assets/icon-instagram.svg";
 
 const footerSections = [
   {
