@@ -1,7 +1,7 @@
 import Header from "./components/header";
 import Hero from "./components/hero";
 import Benefits from "./components/benefits";
-import CTA from "./components/CTA";
+import CTA from "./components/cta";
 import Footer from "./components/footer";
 import ShortenerForm from "./components/shortenerForm";
 
