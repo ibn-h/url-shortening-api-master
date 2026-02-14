@@ -5,7 +5,7 @@ export default function Hero() {
         <div className="flex items-center justify-center flex-col w-full desktop:flex-row-reverse desktop:w-full desktop:justify-between desktop:gap-20">
           <div className="flex items-center justify-center">
             <img
-              src="/src/assets/illustration-working.svg"
+              src="/public/illustration-working.svg"
               alt="Person working on desk"
               className="w-115 left-15 relative h-auto max-w-none desktop:w-175"
             />
