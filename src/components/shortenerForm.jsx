@@ -11,6 +11,13 @@ export default function ShortenerForm() {
 
   const inputRef = useRef(null);
 
+  const handleSubmit = (event) => {
+    if (event.key === "Enter") {
+      shortenLink(event);
+      event.target.blur();
+    }
+  };
+
   const normalizeUrl = (url) => {
     const trimmed = url.trim();
 
@@ -19,8 +26,7 @@ export default function ShortenerForm() {
       : "https://" + url;
   };
 
-  const shortenLink = async (event) => {
-    event.preventDefault();
+  const shortenLink = async () => {
     const input = inputRef.current;
     const link = input.value;
 
@@ -93,6 +99,7 @@ export default function ShortenerForm() {
               ref={inputRef}
               placeholder="Shorten a link here..."
               onChange={updateErrorState}
+              onKeyDown={handleSubmit}
               className={
                 "focus:ring-primary-blue focus:outline-none focus:ring-2 w-full bg-white text-gray-600 p-3 rounded-lg text-left desktop:px-5 desktop:py-3" +
                 (isError ? " ring-3 ring-secondary-red" : "")
