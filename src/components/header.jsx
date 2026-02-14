@@ -14,7 +14,7 @@ export default function Header() {
     <header className="px-(--padding-x-mobile) py-6 desktop:px-(--padding-x-desktop)">
       <div className="flex items-center w-full justify-between relative desktop:gap-10">
         <a href="">
-          <img src="/src/assets/logo.svg" alt="Logo" />
+          <img src="../assets/logo.svg" alt="Logo" />
         </a>
 
         <nav
