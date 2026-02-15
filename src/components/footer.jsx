@@ -2,7 +2,7 @@ import Logo from "../assets/logo.svg?react";
 import FacebookLogo from "../assets/icon-facebook.svg?react";
 import TwitterLogo from "../assets/icon-twitter.svg?react";
 import PinterestLogo from "../assets/icon-pinterest.svg?react";
-import InstagramLogo from "../assets/icon-instagram.svg";
+import InstagramLogo from "../assets/icon-instagram.svg?react";
 
 const footerSections = [
   {
@@ -65,13 +65,16 @@ export default function Footer() {
           ))}
 
           <div className="flex items-center justify-center gap-3">
-            {icons.map((icon, index) => (
-              <a href="" key={index}>
-                {
-                  <icon.logo className="hover:text-primary-blue footer-icon transition-colors duration-300" />
-                }
-              </a>
-            ))}
+            {icons.map((icon, index) => {
+              const Icon = icon.logo;
+              return (
+                <a href="" key={index} aria-label={icon.name}>
+                  {
+                    <Icon className="hover:text-primary-blue footer-icon transition-colors duration-300" />
+                  }
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>
