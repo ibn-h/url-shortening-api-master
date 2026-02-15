@@ -1,4 +1,6 @@
 import { useState, useRef } from "react";
+import MobileBackground from "../assets/bg-boost-mobile.svg";
+import DesktopBackground from "../assets/bg-boost-desktop.svg";
 
 const API_URL = "https://api.tinyurl.com/create";
 const MAX_LINKS = 3;
@@ -91,7 +93,13 @@ export default function ShortenerForm() {
   return (
     <section className="px-(--padding-x-mobile) relative z-10 bg-gray-100 desktop:px-(--padding-x-desktop)">
       <div className="relative bottom-15 mt-15 flex items-center justify-center flex-col gap-6">
-        <div className="w-full p-6 desktop:p-10 desktop:px-12 bg-primary-purple text-white rounded-lg gap-5 flex items-start justify-center flex-col bg-[url('src/assets/bg-shorten-mobile.svg')] bg-no-repeat bg-top-right desktop:flex-row desktop:bg-[url('src/assets/bg-shorten-desktop.svg')] desktop:bg-cover">
+        <div
+          style={{
+            "--bg-mobile": `url(${MobileBackground})`,
+            "--bg-desktop": `url(${DesktopBackground})`,
+          }}
+          className="w-full p-6 desktop:p-10 desktop:px-12 bg-primary-purple text-white rounded-lg gap-5 flex items-start justify-center flex-col  bg-(image:--bg-mobile) bg-no-repeat bg-top-right desktop:flex-row desktop:bg-(image:--bg-desktop) desktop:bg-cover"
+        >
           <div className="desktop:w-auto desktop:flex-1 relative w-full">
             <input
               required

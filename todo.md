@@ -8,3 +8,4 @@
 [x]Check for error messages
 [x]Remove unused packages
 [x]Add ability to shorten URL with enter key
+[]Fix background images
