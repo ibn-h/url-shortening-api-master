@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Logo from "../assets/logo.svg";
 
 const hoverStyle =
   "hover:text-primary-blue desktop:hover:text-black transition-colors duration-300";
@@ -14,7 +15,7 @@ export default function Header() {
     <header className="px-(--padding-x-mobile) py-6 desktop:px-(--padding-x-desktop)">
       <div className="flex items-center w-full justify-between relative desktop:gap-10">
         <a href="">
-          <img src="../assets/logo.svg" alt="Logo" />
+          <img src={Logo} alt="Shortly logo" />
         </a>
 
         <nav

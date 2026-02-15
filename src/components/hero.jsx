@@ -1,3 +1,5 @@
+import WorkingIcon from "../assets/illustration-working.svg";
+
 export default function Hero() {
   return (
     <section className="px-(--padding-x-mobile) py-(--padding-y-mobile) overflow-hidden desktop:px-(--padding-x-desktop) desktop:py-(--padding-y-desktop)">
@@ -5,7 +7,7 @@ export default function Hero() {
         <div className="flex items-center justify-center flex-col w-full desktop:flex-row-reverse desktop:w-full desktop:justify-between desktop:gap-20">
           <div className="flex items-center justify-center">
             <img
-              src="src/assets/illustration-working.svg"
+              src={WorkingIcon}
               alt="Person working on desk"
               className="w-115 left-15 relative h-auto max-w-none desktop:w-175"
             />
